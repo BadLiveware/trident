@@ -36,6 +36,12 @@ affinity: {}
 # imageRegistry identifies the registry for the trident-operator, trident, and other images.  Leave empty to accept the default.
 imageRegistry: ""
 
+# identifies the registry to fetch netapp images(trident-operator, trident, etc...). This overrides the specified imageRegistry
+netappImageRegistry: ""
+
+# identifies the registry for the csi-node-driver-registrar, csi-attacher, and other images. This overrides the specified imageRegistry
+csiImageRegistry: ""
+
 # imagePullPolicy sets the image pull policy for the trident-operator.
 imagePullPolicy: IfNotPresent
 
