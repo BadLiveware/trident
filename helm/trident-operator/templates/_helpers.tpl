@@ -66,14 +66,17 @@ Trident operator debug
 Trident operator image
 */}}
 {{- define "trident-operator.image" -}}
+{{- $chartAppVersion := (.Chart.AppVersion | trunc 5) -}}
+{{- $imageTagContainsTag := regexMatch ":.*$" .Values.operatorImage -}}
+{{- $imageTag := $imageTagContainsTag | ternary "" (printf ":%s" (.Values.operatorImageTag | default $chartAppVersion)) }}
 {{- if .Values.operatorImage }}
-{{- .Values.operatorImage }}
+{{- .Values.operatorImage }}{{ $imageTag }}
 {{- else if .Values.netappImageRegistry }}
-{{- .Values.netappImageRegistry }}/trident-operator:{{ .Values.operatorImageTag | default .Chart.AppVersion }}
+{{- .Values.netappImageRegistry }}/trident-operator{{ $imageTag }}
 {{- else if .Values.imageRegistry }}
-{{- .Values.imageRegistry }}/trident-operator:{{ .Values.operatorImageTag | default .Chart.AppVersion }}
+{{- .Values.imageRegistry }}/trident-operator{{ $imageTag }}
 {{- else }}
-{{- "" }}netapp/trident-operator:{{ .Values.operatorImageTag | default .Chart.AppVersion }}
+{{- "" }}netapp/trident-operator{{ $imageTag }}
 {{- end }}
 {{- end }}
 
@@ -114,14 +117,17 @@ Trident SilenceAutosupport
 Trident AutoSupport image
 */}}
 {{- define "trident.autosupportImage" -}}
+{{- $chartAppVersion := (.Chart.AppVersion | trunc 5) -}}
+{{- $imageTagContainsTag := regexMatch ":.*$" .Values.tridentAutosupportImage -}}
+{{- $imageTag := $imageTagContainsTag | ternary "" (printf ":%s" (.Values.tridentAutosupportImageTag | default $chartAppVersion)) }}
 {{- if .Values.tridentAutosupportImage }}
-{{- .Values.tridentAutosupportImage }}
+{{- .Values.tridentAutosupportImage }}{{ $imageTag }}
 {{- else if .Values.netappImageRegistry }}
-{{- .Values.netappImageRegistry }}/trident-autosupport:{{ .Values.tridentAutosupportImageTag | default .Chart.AppVersion | trunc 5}}
+{{- .Values.netappImageRegistry }}/trident-autosupport{{ $imageTag }}
 {{- else if .Values.imageRegistry }}
-{{- .Values.imageRegistry }}/trident-autosupport:{{ .Values.tridentAutosupportImageTag | default .Chart.AppVersion | trunc 5}}
+{{- .Values.imageRegistry }}/trident-autosupport{{ $imageTag }}
 {{- else }}
-{{- "" }}netapp/trident-autosupport:{{ .Values.tridentAutosupportImageTag | default .Chart.AppVersion | trunc 5}}
+{{- "" }}netapp/trident-autosupport{{ $imageTag }}
 {{- end }}
 {{- end }}
 
@@ -151,14 +157,17 @@ Trident probe port
 Trident image
 */}}
 {{- define "trident.image" -}}
+{{- $chartAppVersion := (.Chart.AppVersion | trunc 5) -}}
+{{- $imageTagContainsTag := regexMatch ":.*$" .Values.tridentImage -}}
+{{- $imageTag := $imageTagContainsTag | ternary "" (printf ":%s" (.Values.tridentImageTag | default $chartAppVersion)) }}
 {{- if .Values.tridentImage }}
-{{- .Values.tridentImage }}
+{{- .Values.tridentImage }}{{ $imageTag }}
 {{- else if .Values.netappImageRegistry }}
-{{- .Values.netappImageRegistry }}/trident:{{ .Values.tridentImageTag | default .Chart.AppVersion }}
+{{- .Values.netappImageRegistry }}/trident{{ $imageTag }}
 {{- else if .Values.imageRegistry }}
-{{- .Values.imageRegistry }}/trident:{{ .Values.tridentImageTag | default .Chart.AppVersion }}
+{{- .Values.imageRegistry }}/trident{{ $imageTag }}
 {{- else }}
-{{- "" }}netapp/trident:{{ .Values.tridentImageTag | default .Chart.AppVersion }}
+{{- "" }}netapp/trident{{ $imageTag }}
 {{- end }}
 {{- end }}
 
