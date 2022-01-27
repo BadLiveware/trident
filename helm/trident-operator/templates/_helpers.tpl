@@ -108,6 +108,7 @@ Trident SilenceAutosupport
 {{- end }}
 {{- end }}
 
+{{/*
 Trident AutoSupport image
 */}}
 {{- define "trident.autosupportImage" -}}
